@@ -21,6 +21,9 @@ import {
 } from 'lucide-react';
 import { CameraAngle, CheerReaction, WatchPartyMember, BrandName } from '../types';
 import { audioSynth } from '../services/audioSynth';
+import mainStageImg from '../src/assets/images/concert_stage_stream_1792160451262.jpg';
+import biasCamImg from '../src/assets/images/bias_focus_cam_1792160467203.jpg';
+import danceCamImg from '../src/assets/images/dance_cam_1792160466135.jpg';
 
 interface AtHomeStageProps {
   sponsorActive: boolean;
@@ -142,12 +145,12 @@ export const AtHomeStage: React.FC<AtHomeStageProps> = ({
   const getCameraSource = () => {
     switch (cameraAngle) {
       case 'bias':
-        return '/src/assets/images/bias_focus_cam_1792160467203.jpg';
+        return biasCamImg;
       case 'dance':
-        return '/src/assets/images/dance_cam_1792160466135.jpg';
+        return danceCamImg;
       case 'main':
       default:
-        return '/src/assets/images/concert_stage_stream_1792160451262.jpg';
+        return mainStageImg;
     }
   };
 

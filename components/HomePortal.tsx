@@ -17,6 +17,7 @@ import {
   Cpu
 } from 'lucide-react';
 import { AppMode, BrandName } from '../types';
+import synqHaloImg from '../src/assets/images/auraband_hardware_1792160449440.jpg';
 
 interface HomePortalProps {
   onSelectMode: (mode: AppMode) => void;
@@ -285,7 +286,7 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onSelectMode, brandName,
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-black/50 shadow-2xl group">
               <img
-                src="/src/assets/images/auraband_hardware_1792160449440.jpg"
+                src={synqHaloImg}
                 alt="SYNQ Halo Concert Wearable Hardware"
                 className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
                 referrerPolicy="no-referrer"

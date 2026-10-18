@@ -5,7 +5,7 @@
 
 export type AppMode = 'home' | 'at-home' | 'in-venue';
 
-export type BrandName = 'SONEX' | 'RESONA' | 'SYNQ' | 'PULSEX';
+export type BrandName = 'Tavy';
 
 export type CameraAngle = 'main' | 'bias' | 'dance';
 

@@ -1237,11 +1237,11 @@ export const LiveVenue: React.FC<LiveVenueProps> = ({
           <div className="flex items-center gap-2">
             <Cpu className="w-5 h-5 text-cyan-400" />
             <h3 className="font-heading text-lg font-bold text-white tracking-wide">
-              PANEL 5: SYNQ HALO COMPANION CONSOLE
+              PANEL 5: TAVY HALO COMPANION CONSOLE
             </h3>
           </div>
           <div className="flex items-center gap-2 text-xs font-mono-tech text-slate-400">
-            <span>DEVICE ID: SYNQ-HALO-01</span>
+            <span>DEVICE ID: TAVY-HALO-01</span>
             <span>·</span>
             <span className="text-emerald-400">BLE 5.3 LINKED</span>
           </div>

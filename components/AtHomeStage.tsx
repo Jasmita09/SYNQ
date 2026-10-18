@@ -98,7 +98,7 @@ export const AtHomeStage: React.FC<AtHomeStageProps> = ({
 
   const copyRoomLink = () => {
     if (navigator?.clipboard) {
-      navigator.clipboard.writeText('https://aurabeat.live/room/#NOVA-STARLIGHT');
+      navigator.clipboard.writeText('https://tavy.live/room/#TAVY-STARLIGHT');
     }
     setCopiedLink(true);
     setTimeout(() => setCopiedLink(false), 2500);
@@ -435,7 +435,7 @@ export const AtHomeStage: React.FC<AtHomeStageProps> = ({
               <div className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center justify-between">
                 <div>
                   <p className="text-[11px] font-mono-tech text-slate-400">ROOM ID</p>
-                  <p className="text-sm font-bold font-mono-tech text-cyan-300">#{brandName}-STARLIGHT</p>
+                  <p className="text-sm font-bold font-mono-tech text-amber-300">#TAVY-STARLIGHT</p>
                 </div>
                 <button
                   onClick={copyRoomLink}
@@ -523,8 +523,8 @@ export const AtHomeStage: React.FC<AtHomeStageProps> = ({
                     PANEL D: INTERACTIVE RHYTHM
                   </span>
                 </div>
-                <span className="text-[11px] font-mono-tech px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/30">
-                  {brandName}PLAY
+                <span className="text-[11px] font-mono-tech px-2.5 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-500/30">
+                  TAVYPLAY
                 </span>
               </div>
 

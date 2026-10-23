@@ -4,24 +4,67 @@
  */
 
 import React, { useState } from 'react';
+import { MotionConfig } from 'framer-motion';
 import { GlobalNavbar } from './components/GlobalNavbar';
 import { HomePortal } from './components/HomePortal';
-import { DownloadAppModal } from './components/DownloadAppModal';
 import { HaloDetailModal } from './components/HaloDetailModal';
 import { TavyCompanionApp } from './components/TavyCompanionApp';
+import { ExperienceSelect } from './components/experience/ExperienceSelect';
+import { ExperiencePlaceholder } from './components/experience/ExperiencePlaceholder';
+import { useAppView } from './hooks/useAppView';
 
-export const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'website' | 'companion-app'>('website');
+const AppContent: React.FC = () => {
+  const { view, navigate } = useAppView();
   const [isArchitectureModalOpen, setIsArchitectureModalOpen] = useState<boolean>(false);
 
   // If in companion app view, render interactive mobile simulation
-  if (currentView === 'companion-app') {
+  if (view === 'companion-app') {
     return (
       <TavyCompanionApp
-        onBackToWebsite={() => {
-          setCurrentView('website');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
+        onBackToWebsite={() => navigate('website')}
+        onEnterExperience={() => navigate('experience')}
+      />
+    );
+  }
+
+  if (view === 'experience') {
+    return (
+      <ExperienceSelect
+        onSelectLiveVenue={() => navigate('live-venue')}
+        onSelectAtHome={() => navigate('at-home')}
+        onOpenCompanionApp={() => navigate('companion-app')}
+        onBackToWebsite={() => navigate('website')}
+      />
+    );
+  }
+
+  if (view === 'live-venue') {
+    return (
+      <ExperiencePlaceholder
+        title="Live Venue"
+        plannedFeatures={[
+          'Digital lightstick with on/off, color and beat animations',
+          'Simulated beat cue timeline with optional vibration on supported devices',
+          'Start, pause, stop and exit controls',
+          'Existing safety tools kept within reach',
+        ]}
+        onBack={() => navigate('experience')}
+      />
+    );
+  }
+
+  if (view === 'at-home') {
+    return (
+      <ExperiencePlaceholder
+        title="At-home Concert"
+        plannedFeatures={[
+          'Playable sample video with pause and seek',
+          'Lyrics and captions synchronized to the video timeline',
+          'Wave with the Music prompts, with a tap-based alternative',
+          'Timing-based demo scoring',
+          'Camera angles clearly labeled as real or simulated',
+        ]}
+        onBack={() => navigate('experience')}
       />
     );
   }
@@ -46,15 +89,17 @@ export const App: React.FC = () => {
 
       {/* Clean Editorial Top Navigation Bar (Adaptive scroll transparency) */}
       <GlobalNavbar
-        onOpenDownloadApp={() => setCurrentView('companion-app')}
+        onOpenDownloadApp={() => navigate('companion-app')}
         onOpenArchitecture={() => setIsArchitectureModalOpen(true)}
+        onEnterExperience={() => navigate('experience')}
       />
 
       {/* Main Showcase Landing Page (Flush with top for cinematic backdrop) */}
       <main className="relative z-10 flex-1">
         <HomePortal
-          onOpenDownloadApp={() => setCurrentView('companion-app')}
+          onOpenDownloadApp={() => navigate('companion-app')}
           onOpenArchitecture={() => setIsArchitectureModalOpen(true)}
+          onEnterExperience={() => navigate('experience')}
         />
       </main>
 
@@ -66,5 +111,12 @@ export const App: React.FC = () => {
     </div>
   );
 };
+
+// reducedMotion="user" makes every framer-motion animation honor prefers-reduced-motion
+export const App: React.FC = () => (
+  <MotionConfig reducedMotion="user">
+    <AppContent />
+  </MotionConfig>
+);
 
 export default App;

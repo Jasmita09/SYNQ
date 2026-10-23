@@ -22,7 +22,8 @@ import {
   Play,
   Pause,
   Sliders,
-  ChevronDown
+  ChevronDown,
+  Music2
 } from 'lucide-react';
 import { HaloDetailModal } from './HaloDetailModal';
 import { DownloadAppModal } from './DownloadAppModal';
@@ -33,6 +34,7 @@ import tavyHaloHeroImg from '../src/assets/images/tavy_halo_hero_1792275821098.j
 interface HomePortalProps {
   onOpenDownloadApp: () => void;
   onOpenArchitecture: () => void;
+  onEnterExperience: () => void;
 }
 
 interface HotspotPin {
@@ -46,7 +48,8 @@ interface HotspotPin {
 
 export const HomePortal: React.FC<HomePortalProps> = ({ 
   onOpenDownloadApp,
-  onOpenArchitecture
+  onOpenArchitecture,
+  onEnterExperience
 }) => {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [activeHotspot, setActiveHotspot] = useState<string | null>(null);
@@ -183,6 +186,14 @@ export const HomePortal: React.FC<HomePortalProps> = ({
             >
               <span>Discover TΛVY</span>
               <ChevronDown className="w-4 h-4 text-amber-300 group-hover:translate-y-0.5 transition-transform" />
+            </button>
+
+            <button
+              onClick={onEnterExperience}
+              className="px-8 py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider bg-amber-400 hover:bg-amber-300 text-stone-950 shadow-2xl transition-all cursor-pointer flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            >
+              <Music2 className="w-4 h-4" aria-hidden="true" />
+              <span>Enter Concert Experience</span>
             </button>
 
             <button

@@ -44,9 +44,10 @@ import tavyHaloHeroImg from '../src/assets/images/tavy_halo_hero_1792275821098.j
 
 interface TavyCompanionAppProps {
   onBackToWebsite: () => void;
+  onEnterExperience: () => void;
 }
 
-export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebsite }) => {
+export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebsite, onEnterExperience }) => {
   // Navigation tabs: venue | stream | halo | history
   const [activeTab, setActiveTab] = useState<'venue' | 'stream' | 'halo' | 'history'>('venue');
 
@@ -135,9 +136,17 @@ export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebs
             <span>Halo BLE 5.4 · 0ms Sync</span>
           </div>
 
-          <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold">
+          <span className="hidden sm:inline px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold">
             Interactive Companion App
           </span>
+
+          <button
+            onClick={onEnterExperience}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-400 hover:bg-amber-300 text-stone-950 text-xs font-bold cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12131a]"
+          >
+            <Music className="w-3.5 h-3.5" aria-hidden="true" />
+            <span>Concert Experience</span>
+          </button>
         </div>
       </header>
 

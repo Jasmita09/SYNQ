@@ -73,7 +73,7 @@ export const HaloDetailModal: React.FC<HaloDetailModalProps> = ({
       badge: '120 dB Peak MEMS Dosimeter',
       spec: 'A-weighted SPL sound dosimetry sensor + photoplethysmography heart-rate sensor',
       desc: 'Continuously measures sound exposure against NIOSH safety limits and tracks live crowd energy, warning the user before auditory fatigue sets in.',
-      status: 'NIOSH Guard Calibrated',
+      status: 'Concept spec',
     },
   };
 

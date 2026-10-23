@@ -8,6 +8,62 @@
     <meta property="og:title" content="TΛVY Halo — The Wearable Engineered for Live Sound" />
     <meta property="og:description" content="Feel the concert through 35Hz sub-bass bone conduction and synchronized pastel crowd optics. Dedicated product architecture by TΛVY." />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Concert Experience (ported from AuraBeat) design tokens. Values live as CSS variables in
+      // index.css so the High Contrast preference can swap them.
+      const abColor = (name) => `rgb(var(--ab-${name}) / <alpha-value>)`;
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              stage: abColor('stage'),
+              surface: { DEFAULT: abColor('surface'), raised: abColor('surface-raised') },
+              ink: { DEFAULT: abColor('ink'), muted: abColor('ink-muted') },
+              aura: abColor('aura'),
+              anticipate: abColor('anticipate'),
+              alert: abColor('alert'),
+            },
+            fontFamily: {
+              display: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            },
+            animation: {
+              'aura-drift': 'aura-drift 18s ease-in-out infinite alternate',
+              rise: 'rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both',
+              burst: 'burst 1400ms cubic-bezier(0.1, 0.6, 0.3, 1) both',
+              'glow-in': 'glow-in 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both',
+              'float-up': 'float-up 16s linear infinite',
+              particle: 'particle 1300ms cubic-bezier(0.15, 0.7, 0.3, 1) both',
+              'wave-flow': 'wave-flow 2.6s linear infinite',
+              'crowd-ripple': 'crowd-ripple 1100ms ease-out both',
+              'beam-open': 'beam-open 1600ms cubic-bezier(0.2, 0.7, 0.2, 1) both',
+              shimmer: 'shimmer 1400ms ease-out both',
+              'lyric-in': 'lyric-in 320ms ease-out both',
+              'spot-sweep': 'spot-sweep 7s ease-in-out infinite alternate',
+              'ring-out': 'ring-out 6s ease-out infinite',
+              'ring-in': 'ring-in 3.2s ease-in infinite',
+              'flow-x': 'flow-x 26s linear infinite',
+              'rise-stripes': 'rise-stripes 0.8s linear infinite',
+              'rotate-slow': 'rotate-slow 48s linear infinite',
+              'strip-move': 'strip-move 7s ease-in-out infinite alternate',
+              aurora: 'aurora 14s ease-in-out infinite alternate',
+              twinkle: 'twinkle 2.8s ease-in-out infinite alternate',
+              'haze-drift': 'haze-drift 28s ease-in-out infinite alternate',
+              'float-slow': 'float-slow 18s linear infinite',
+              'camera-drift': 'camera-drift 18s ease-in-out infinite alternate',
+              'aura-ring': 'aura-ring 1.8s cubic-bezier(0.15, 0.6, 0.3, 1) both',
+              'aura-bloom': 'aura-bloom 2.2s cubic-bezier(0.15, 0.6, 0.3, 1) both',
+              'link-draw': 'link-draw 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) both',
+              'floor-wave': 'floor-wave 1.8s cubic-bezier(0.15, 0.6, 0.3, 1) both',
+              'beam-sweep': 'beam-sweep 5s ease-in-out infinite alternate',
+              'live-breathe': 'live-breathe 4s ease-in-out infinite alternate',
+              'live-flash': 'live-flash 480ms ease-out both',
+              'live-spin': 'live-spin 14s linear infinite',
+              'live-cue': 'live-cue 1800ms ease-out both',
+            },
+          },
+        },
+      };
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500;1,600;1,700&family=Italiana&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
@@ -57,18 +113,6 @@
         animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.0/",
-    "react": "https://esm.sh/react@^19.2.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.0/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.553.0",
-    "@google/genai": "https://esm.sh/@google/genai@^1.29.0",
-    "framer-motion": "https://esm.sh/framer-motion@^12.23.24"
-  }
-}
-</script>
 <link rel="stylesheet" href="./index.css">
 </head>
   <body>

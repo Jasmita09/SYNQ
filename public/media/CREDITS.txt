@@ -1,0 +1,4 @@
+grateful.mp4 / grateful.webm — "Grateful" by NEFFEX, licensed under Creative Commons Attribution 3.0 (CC BY 3.0).
+Source: https://www.youtube.com/watch?v=btv1MvqD9AM
+grateful.mp4 is a 720p H.264/AAC transcode of grateful.webm for Safari/iOS compatibility.
+Used for the At-home Concert demo (ported from AuraBeat).

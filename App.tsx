@@ -3,26 +3,58 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
+import { MotionConfig } from 'framer-motion';
 import { GlobalNavbar } from './components/GlobalNavbar';
 import { HomePortal } from './components/HomePortal';
-import { DownloadAppModal } from './components/DownloadAppModal';
 import { HaloDetailModal } from './components/HaloDetailModal';
 import { TavyCompanionApp } from './components/TavyCompanionApp';
+import { ExperienceSelect } from './components/experience/ExperienceSelect';
+import { useAppView } from './hooks/useAppView';
 
-export const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'website' | 'companion-app'>('website');
+// The concert modes (ported from AuraBeat) load on demand so the landing page stays light.
+const LiveConcert = lazy(() => import('./aurabeat/pages/LiveConcert'));
+const AtHomeConcert = lazy(() => import('./aurabeat/pages/AtHomeConcert'));
+const concertFallback = <div className="min-h-screen bg-[#090a0f]" />;
+
+const AppContent: React.FC = () => {
+  const { view, navigate } = useAppView();
   const [isArchitectureModalOpen, setIsArchitectureModalOpen] = useState<boolean>(false);
 
   // If in companion app view, render interactive mobile simulation
-  if (currentView === 'companion-app') {
+  if (view === 'companion-app') {
     return (
       <TavyCompanionApp
-        onBackToWebsite={() => {
-          setCurrentView('website');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
+        onBackToWebsite={() => navigate('website')}
+        onEnterExperience={() => navigate('experience')}
       />
+    );
+  }
+
+  if (view === 'experience') {
+    return (
+      <ExperienceSelect
+        onSelectLiveVenue={() => navigate('live-venue')}
+        onSelectAtHome={() => navigate('at-home')}
+        onOpenCompanionApp={() => navigate('companion-app')}
+        onBackToWebsite={() => navigate('website')}
+      />
+    );
+  }
+
+  if (view === 'live-venue') {
+    return (
+      <Suspense fallback={concertFallback}>
+        <LiveConcert onExit={() => navigate('experience')} onSwitchMode={() => navigate('at-home')} />
+      </Suspense>
+    );
+  }
+
+  if (view === 'at-home') {
+    return (
+      <Suspense fallback={concertFallback}>
+        <AtHomeConcert onExit={() => navigate('experience')} onSwitchMode={() => navigate('live-venue')} />
+      </Suspense>
     );
   }
 
@@ -46,15 +78,17 @@ export const App: React.FC = () => {
 
       {/* Clean Editorial Top Navigation Bar (Adaptive scroll transparency) */}
       <GlobalNavbar
-        onOpenDownloadApp={() => setCurrentView('companion-app')}
+        onOpenDownloadApp={() => navigate('companion-app')}
         onOpenArchitecture={() => setIsArchitectureModalOpen(true)}
+        onEnterExperience={() => navigate('experience')}
       />
 
       {/* Main Showcase Landing Page (Flush with top for cinematic backdrop) */}
       <main className="relative z-10 flex-1">
         <HomePortal
-          onOpenDownloadApp={() => setCurrentView('companion-app')}
+          onOpenDownloadApp={() => navigate('companion-app')}
           onOpenArchitecture={() => setIsArchitectureModalOpen(true)}
+          onEnterExperience={() => navigate('experience')}
         />
       </main>
 
@@ -66,5 +100,12 @@ export const App: React.FC = () => {
     </div>
   );
 };
+
+// reducedMotion="user" makes every framer-motion animation honor prefers-reduced-motion
+export const App: React.FC = () => (
+  <MotionConfig reducedMotion="user">
+    <AppContent />
+  </MotionConfig>
+);
 
 export default App;

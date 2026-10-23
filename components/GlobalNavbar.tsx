@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Music2 } from 'lucide-react';
 
 interface GlobalNavbarProps {
   onOpenDownloadApp: () => void;
   onOpenArchitecture: () => void;
+  onEnterExperience: () => void;
 }
 
 export const GlobalNavbar: React.FC<GlobalNavbarProps> = ({
   onOpenDownloadApp,
   onOpenArchitecture,
+  onEnterExperience,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -106,17 +108,30 @@ export const GlobalNavbar: React.FC<GlobalNavbarProps> = ({
           </nav>
         </div>
 
-        {/* Right Section: Only single [ DOWNLOAD APP -> ] button */}
-        <div className="flex items-center gap-3 shrink-0">
+        {/* Right Section: Concert Experience entry + [ DOWNLOAD APP -> ] button */}
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <button
+            onClick={onEnterExperience}
+            className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium tracking-wide transition-all cursor-pointer flex items-center gap-2 border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 ${
+              isScrolled
+                ? 'bg-transparent hover:bg-stone-200/60 text-[#141312] border-stone-300 focus-visible:ring-offset-[#faf7f2]'
+                : 'bg-white/10 hover:bg-white/20 text-white border-white/30 focus-visible:ring-offset-black'
+            }`}
+          >
+            <Music2 className={`w-3.5 h-3.5 ${isScrolled ? 'text-[#b45309]' : 'text-amber-300'}`} aria-hidden="true" />
+            <span className="hidden sm:inline">Enter Concert Experience</span>
+            <span className="sm:hidden">Experience</span>
+          </button>
           <button
             onClick={onOpenDownloadApp}
-            className={`px-5 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium tracking-wide shadow-sm hover:shadow-md transition-all cursor-pointer border-0 flex items-center gap-2 group ${
+            className={`px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium tracking-wide shadow-sm hover:shadow-md transition-all cursor-pointer border-0 flex items-center gap-2 group ${
               isScrolled
                 ? 'bg-[#141312] hover:bg-stone-800 text-[#faf7f2]'
                 : 'bg-white hover:bg-stone-200 text-[#141312]'
             }`}
           >
-            <span>Download App</span>
+            <span className="hidden sm:inline">Download App</span>
+            <span className="sm:hidden">Get App</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </button>
         </div>

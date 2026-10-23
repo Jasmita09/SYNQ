@@ -241,6 +241,10 @@ export const Tavy3DWatchViewer: React.FC<Tavy3DWatchViewerProps> = ({
     controls.maxDistance = 6.5;
     controls.maxPolarAngle = Math.PI / 2 + 0.15; // Don't go too far under ground
     controls.target.set(0, 0, 0);
+    // Track user interaction through the public start/end events (OrbitControls.state is internal and untyped)
+    let isUserInteracting = false;
+    controls.addEventListener('start', () => { isUserInteracting = true; });
+    controls.addEventListener('end', () => { isUserInteracting = false; });
 
     // 6. Balanced 3-Point Studio Lighting
     // Warm key light
@@ -573,7 +577,7 @@ export const Tavy3DWatchViewer: React.FC<Tavy3DWatchViewerProps> = ({
       }
 
       // Auto rotation when enabled and user not interacting
-      if (autoRotate && !controls.state) {
+      if (autoRotate && !isUserInteracting) {
         partsGroup.rotation.y += delta * 0.25;
       }
 

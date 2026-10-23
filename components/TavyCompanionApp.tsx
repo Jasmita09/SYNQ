@@ -44,9 +44,10 @@ import tavyHaloHeroImg from '../src/assets/images/tavy_halo_hero_1792275821098.j
 
 interface TavyCompanionAppProps {
   onBackToWebsite: () => void;
+  onEnterExperience: () => void;
 }
 
-export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebsite }) => {
+export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebsite, onEnterExperience }) => {
   // Navigation tabs: venue | stream | halo | history
   const [activeTab, setActiveTab] = useState<'venue' | 'stream' | 'halo' | 'history'>('venue');
 
@@ -132,12 +133,20 @@ export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebs
         <div className="flex items-center gap-2.5">
           <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-600/50 text-[11px] font-mono text-emerald-400">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Halo BLE 5.4 · 0ms Sync</span>
+            <span>Simulated Halo · Demo Data</span>
           </div>
 
-          <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold">
+          <span className="hidden sm:inline px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold">
             Interactive Companion App
           </span>
+
+          <button
+            onClick={onEnterExperience}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-400 hover:bg-amber-300 text-stone-950 text-xs font-bold cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12131a]"
+          >
+            <Music className="w-3.5 h-3.5" aria-hidden="true" />
+            <span>Concert Experience</span>
+          </button>
         </div>
       </header>
 
@@ -188,6 +197,10 @@ export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebs
 
           {/* App Content Body (Scrollable Screen) */}
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 pb-24 text-stone-100 scrollbar-none">
+            {/* Demo disclosure: nothing in this app reads a real device, microphone or location */}
+            <p role="note" className="px-3 py-2 rounded-2xl bg-stone-900/80 border border-stone-800 text-[11px] leading-relaxed text-stone-300">
+              <span className="font-bold text-amber-300">Demo mode.</span> Halo, Bluetooth, sound-level, friend-location and SOS data are simulated. Nothing here contacts emergency services or gives hearing-safety advice. In an emergency, tell venue staff or call your local emergency number.
+            </p>
             {/* ======================================================== */}
             {/* TAB 1: LIVE VENUE & DECIBEL DOSIMETER                     */}
             {/* ======================================================== */}
@@ -203,7 +216,7 @@ export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebs
                   <div className="flex items-center justify-between text-xs text-stone-400 mb-2">
                     <span className="flex items-center gap-1.5 font-medium">
                       <Volume2 className="w-4 h-4 text-amber-400" />
-                      Live Acoustic Dosimeter
+                      Sound Level (Simulated)
                     </span>
                     <button
                       onClick={() => setEarplugsEquipped(!earplugsEquipped)}
@@ -226,13 +239,13 @@ export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebs
                     <p className={`text-xs mt-1 font-semibold ${
                       currentDecibel > 100 ? 'text-amber-400' : 'text-emerald-400'
                     }`}>
-                      {currentDecibel > 100 ? 'High Energy Zone · Haptics Engaged' : 'Safe Acoustic Exposure'}
+                      {currentDecibel > 100 ? 'High Energy Zone (demo reading)' : 'Lower Level (demo reading)'}
                     </p>
 
                     {/* NIOSH Dose Bar */}
                     <div className="mt-3.5 space-y-1 text-left">
                       <div className="flex justify-between text-[11px] text-stone-400">
-                        <span>Daily NIOSH Dose</span>
+                        <span>Daily Noise Dose (illustrative)</span>
                         <span className="text-amber-400 font-mono font-medium">64% Consumed</span>
                       </div>
                       <div className="w-full bg-stone-800 h-2 rounded-full overflow-hidden">
@@ -241,7 +254,7 @@ export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebs
                           style={{ width: '64%' }}
                         />
                       </div>
-                      <p className="text-[10px] text-stone-400 text-right">Safe for ~3.1 hours at current volume</p>
+                      <p className="text-[10px] text-stone-400 text-right">Demo values, not a measurement or hearing-safety advice</p>
                     </div>
                   </div>
                 </div>
@@ -276,7 +289,7 @@ export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebs
 
                   {/* Preset Quick Chips */}
                   <div className="grid grid-cols-2 gap-1.5 text-xs">
-                    {['NEED WATER', 'AT SOUNDBOOTH', 'CALL 911 / MEDIC', 'STAGE LEFT BAR'].map((preset) => (
+                    {['NEED WATER', 'AT SOUNDBOOTH', 'NEED A MEDIC', 'STAGE LEFT BAR'].map((preset) => (
                       <button
                         key={preset}
                         onClick={() => setSelectedBigText(preset)}
@@ -320,10 +333,10 @@ export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebs
                   <div className="flex items-center justify-between text-xs">
                     <span className="flex items-center gap-1.5 font-bold text-stone-200">
                       <WifiOff className="w-4 h-4 text-emerald-400" />
-                      10m Zero-Infrastructure Radar
+                      10m Radar (Simulated)
                     </span>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800">
-                      3 Friends in Range
+                      3 Demo Friends
                     </span>
                   </div>
 
@@ -373,7 +386,7 @@ export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebs
                   >
                     <AlertTriangle className="w-4 h-4" />
                     <span>
-                      {isBroadcastingBeacon ? 'SOS Beacon Transmitting to Cluster' : 'Send Haptic Ping to Friends (10m)'}
+                      {isBroadcastingBeacon ? 'Simulated SOS Ping (No Emergency Call)' : 'Simulate Ping to Friends (Demo)'}
                     </span>
                   </button>
                 </div>
@@ -408,7 +421,7 @@ export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebs
                     {/* Stream overlays */}
                     <div className="absolute top-3 left-3 px-2 py-1 rounded bg-black/70 backdrop-blur-md text-[10px] font-mono text-emerald-400 flex items-center gap-1 border border-white/10">
                       <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping" />
-                      <span>LIVE STAGE FEED · 0ms HAPTIC</span>
+                      <span>DEMO FEED · STILL IMAGES</span>
                     </div>
 
                     <div className="absolute bottom-3 right-3 px-2 py-1 rounded bg-black/70 backdrop-blur-md text-[10px] font-mono text-amber-300 border border-white/10">
@@ -522,7 +535,7 @@ export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebs
                     <div className="flex items-center justify-between">
                       <h4 className="font-bold text-white text-sm">TΛVY Halo A</h4>
                       <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800">
-                        Active
+                        Simulated
                       </span>
                     </div>
                     <p className="text-[11px] text-stone-400">Titanium Grade 5 · BLE 5.4 Low Latency</p>
@@ -638,7 +651,7 @@ export const TavyCompanionApp: React.FC<TavyCompanionAppProps> = ({ onBackToWebs
                       <BarChart3 className="w-4 h-4 text-amber-400" />
                       Tonight's Acoustic Exposure
                     </span>
-                    <span className="text-[10px] text-emerald-400 font-mono">NIOSH Compliant</span>
+                    <span className="text-[10px] text-emerald-400 font-mono">Demo Data</span>
                   </div>
 
                   <div className="grid grid-cols-3 gap-2 text-center pt-1">

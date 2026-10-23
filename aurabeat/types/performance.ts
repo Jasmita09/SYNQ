@@ -54,6 +54,8 @@ export interface PerformanceMediaSource {
   src: string;
   poster?: string;
   type?: string;
+  /** Further encodings to try in order if the browser can't play `src` (e.g. WebM after MP4). */
+  alternatives?: { src: string; type: string }[];
 }
 
 export interface Track {

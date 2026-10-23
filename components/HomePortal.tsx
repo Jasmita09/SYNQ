@@ -88,7 +88,7 @@ export const HomePortal: React.FC<HomePortalProps> = ({
       id: 'titanium',
       name: 'Left Titanium Rim & SOS Switch',
       badge: 'Grade 5 Aerospace Titanium',
-      desc: 'Bead-blasted satin titanium chassis with an integrated 3-second tactile hold that initiates a localized emergency safety perimeter across the offline mesh.',
+      desc: 'Bead-blasted satin titanium chassis with an integrated 3-second tactile hold that sends a proximity alert to nearby Halo wearers over the offline mesh (concept; it does not contact emergency services).',
       top: '50%',
       left: '33%',
     },
@@ -261,7 +261,7 @@ export const HomePortal: React.FC<HomePortalProps> = ({
                   </div>
                   <div className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#b45309]" />
-                    <span>Continuous NIOSH Leq(A) hearing protection</span>
+                    <span>Sound-exposure tracking against NIOSH guidance (concept)</span>
                   </div>
                 </div>
               </div>
@@ -309,7 +309,7 @@ export const HomePortal: React.FC<HomePortalProps> = ({
                   </div>
                   <div className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-emerald-700" />
-                    <span>Emergency SOS proximity broadcast</span>
+                    <span>Proximity alert to nearby friends (concept)</span>
                   </div>
                 </div>
               </div>
@@ -444,7 +444,7 @@ export const HomePortal: React.FC<HomePortalProps> = ({
               </div>
               <div className="space-y-1">
                 <p className="text-xs font-bold uppercase tracking-wider text-[#b45309]">BLE 5.3 Mesh</p>
-                <p className="text-xs text-stone-600 font-light">100% offline peer-to-peer safety</p>
+                <p className="text-xs text-stone-600 font-light">Offline peer-to-peer alerts (concept)</p>
               </div>
               <div className="space-y-1">
                 <p className="text-xs font-bold uppercase tracking-wider text-[#b45309]">120 dB SPL Guard</p>
@@ -772,8 +772,8 @@ export const HomePortal: React.FC<HomePortalProps> = ({
                         <div className="bg-amber-400 h-full w-[64%] rounded-full" />
                       </div>
                       <div className="flex justify-between text-[10px] text-stone-400">
-                        <span>NIOSH Budget: 64% Used</span>
-                        <span className="text-emerald-400 font-medium">Safe for 3.1 hrs</span>
+                        <span>Noise Dose (demo): 64%</span>
+                        <span className="text-emerald-400 font-medium">Demo reading</span>
                       </div>
                     </div>
 
@@ -813,7 +813,7 @@ export const HomePortal: React.FC<HomePortalProps> = ({
                     Arena Presence Suite
                   </h4>
                   <p className="text-stone-600 text-sm leading-relaxed font-light">
-                    The in-venue companion app turns your device into an emergency-ready, high-contrast festival tool: project messages silently over 110 dB roar, monitor ear safety, and locate companions via 10m offline radar.
+                    The in-venue companion app turns your device into a high-contrast festival tool: project messages silently over 110 dB roar, monitor ear safety, and locate companions via 10m offline radar.
                   </p>
                 </div>
               </div>
@@ -1010,7 +1010,7 @@ export const HomePortal: React.FC<HomePortalProps> = ({
             </div>
           </div>
 
-          <div className="pt-8 border-t border-stone-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-stone-500 font-light">
+          <div className="pt-8 border-t border-stone-800/80 flex flex-col sm:flex-row sm:flex-wrap items-center justify-between gap-4 text-[11px] text-stone-500 font-light">
             <div className="flex flex-wrap items-center gap-6">
               <a href="#terms" className="hover:text-stone-300 transition-colors">Terms &amp; Conditions</a>
               <a href="#privacy" className="hover:text-stone-300 transition-colors">Privacy Policy</a>
@@ -1019,6 +1019,11 @@ export const HomePortal: React.FC<HomePortalProps> = ({
             </div>
             <p>
               Copyright © 2026 TΛVY Inc. All rights reserved.
+            </p>
+            <p className="basis-full text-[11px] leading-relaxed text-stone-500">
+              TΛVY Halo is a product concept. Device connections, sound-level readings, friend locations and SOS
+              features shown on this site and in the demo apps are simulated. They are not medical or hearing-safety
+              advice and do not contact emergency services.
             </p>
           </div>
         </div>

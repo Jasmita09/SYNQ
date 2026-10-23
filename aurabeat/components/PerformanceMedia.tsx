@@ -81,14 +81,25 @@ export default function PerformanceMedia({
         {media ? (
           <video
             ref={mediaRef}
-            src={media.src}
+            src={media.alternatives ? undefined : media.src}
             poster={media.poster}
             muted={muted}
             playsInline
             preload="metadata"
-            onError={onMediaError}
+            onError={media.alternatives ? undefined : onMediaError}
             className="absolute inset-0 size-full object-contain"
-          />
+          >
+            {/* With several encodings the browser picks the first it can play; only the last failing source means no video */}
+            {media.alternatives &&
+              [{ src: media.src, type: media.type ?? "" }, ...media.alternatives].map((source, i, all) => (
+                <source
+                  key={source.src}
+                  src={source.src}
+                  type={source.type || undefined}
+                  onError={i === all.length - 1 ? onMediaError : undefined}
+                />
+              ))}
+          </video>
         ) : (
           <div className="absolute inset-0 bg-surface">{placeholder}</div>
         )}

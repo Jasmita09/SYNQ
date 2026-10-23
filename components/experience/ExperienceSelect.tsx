@@ -32,22 +32,22 @@ export const ExperienceSelect: React.FC<ExperienceSelectProps> = ({
   const options: ExperienceOption[] = [
     {
       id: 'live-venue',
-      title: 'Live Venue',
+      title: 'Live Concert',
       tagline: "You're in the arena. Turn your phone into a lightstick that follows the beat.",
       image: cinematicStageImg,
       imageAlt: 'Arena stage with warm lighting above a crowd',
       icon: Ticket,
-      highlights: ['Digital lightstick with beat animation', 'Visual beat cues, optional vibration', 'Safety tools one tap away'],
+      highlights: ['Full-screen lightstick with on/off and beat lighting', 'BASS, BUILD, CHORUS, DROP cue words and optional vibration', 'Runs on a simulated show: no venue or Halo needed'],
       onSelect: onSelectLiveVenue,
     },
     {
       id: 'at-home',
       title: 'At-home Concert',
-      tagline: 'Watch a concert from home with captions and play along with the music.',
+      tagline: 'Watch a concert from home with synced lyrics, and wave or tap along with the music.',
       image: stageStreamImg,
       imageAlt: 'Concert stream showing a performer on stage',
       icon: Home,
-      highlights: ['Playable sample video with seek controls', 'Timed lyrics and captions', 'Wave or tap along with the music'],
+      highlights: ['Concert video with play, pause, seek and restart', 'Lyrics timed to the video', 'Wave with the Music, scored on your timing'],
       onSelect: onSelectAtHome,
     },
   ];

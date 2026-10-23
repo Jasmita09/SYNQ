@@ -3,15 +3,19 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { MotionConfig } from 'framer-motion';
 import { GlobalNavbar } from './components/GlobalNavbar';
 import { HomePortal } from './components/HomePortal';
 import { HaloDetailModal } from './components/HaloDetailModal';
 import { TavyCompanionApp } from './components/TavyCompanionApp';
 import { ExperienceSelect } from './components/experience/ExperienceSelect';
-import { ExperiencePlaceholder } from './components/experience/ExperiencePlaceholder';
 import { useAppView } from './hooks/useAppView';
+
+// The concert modes (ported from AuraBeat) load on demand so the landing page stays light.
+const LiveConcert = lazy(() => import('./aurabeat/pages/LiveConcert'));
+const AtHomeConcert = lazy(() => import('./aurabeat/pages/AtHomeConcert'));
+const concertFallback = <div className="min-h-screen bg-[#090a0f]" />;
 
 const AppContent: React.FC = () => {
   const { view, navigate } = useAppView();
@@ -40,32 +44,17 @@ const AppContent: React.FC = () => {
 
   if (view === 'live-venue') {
     return (
-      <ExperiencePlaceholder
-        title="Live Venue"
-        plannedFeatures={[
-          'Digital lightstick with on/off, color and beat animations',
-          'Simulated beat cue timeline with optional vibration on supported devices',
-          'Start, pause, stop and exit controls',
-          'Existing safety tools kept within reach',
-        ]}
-        onBack={() => navigate('experience')}
-      />
+      <Suspense fallback={concertFallback}>
+        <LiveConcert onExit={() => navigate('experience')} onSwitchMode={() => navigate('at-home')} />
+      </Suspense>
     );
   }
 
   if (view === 'at-home') {
     return (
-      <ExperiencePlaceholder
-        title="At-home Concert"
-        plannedFeatures={[
-          'Playable sample video with pause and seek',
-          'Lyrics and captions synchronized to the video timeline',
-          'Wave with the Music prompts, with a tap-based alternative',
-          'Timing-based demo scoring',
-          'Camera angles clearly labeled as real or simulated',
-        ]}
-        onBack={() => navigate('experience')}
-      />
+      <Suspense fallback={concertFallback}>
+        <AtHomeConcert onExit={() => navigate('experience')} onSwitchMode={() => navigate('live-venue')} />
+      </Suspense>
     );
   }
 
